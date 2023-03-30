@@ -6,34 +6,38 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Cars")
+@Table(name = "cars")
 public class CarEntity implements Serializable {
 
-    private int id;
+    private Integer id;
 
     @Column(name = "category_name")
-    private String carName;
-    private String carModel;
+    private String Name;
+    private String Model;
+    @Column(name = "engine_type")
     private String engineType;
+
+    @Column(name = "engine_capacity")
     private int engineCapacity;
-    private String bodyCar;
+    private String body;
     private String color;
+    @Column(name = "release_year")
     private int releaseYear;
-    private int carPrice;
+    private int price;
 
     public CarEntity(){
     }
-    public CarEntity (String carName, String carModel, String engineType,
-                      int engineCapacity, String bodyCar, String color,
-                      int releaseYear,int carPrice){
-        this.carName = carName;
-        this.carModel = carModel;
+    public CarEntity (String Name, String Model, String engineType,
+                      int engineCapacity, String body, String color,
+                      int releaseYear,int price){
+        this.Name = Name;
+        this.Model = Model;
         this.engineType = engineType;
         this.engineCapacity = engineCapacity;
-        this.bodyCar = bodyCar;
+        this.body = body;
         this.color = color;
         this.releaseYear = releaseYear;
-        this.carPrice = carPrice;
+        this.price = price;
     }
 
     @Id
@@ -47,20 +51,20 @@ public class CarEntity implements Serializable {
         this.id = id;
     }
 
-    public String getCarName() {
-        return carName;
+    public String getName() {
+        return Name;
     }
 
-    public void setCarName(String carName) {
-        this.carName = carName;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
-    public String getCarModel() {
-        return carModel;
+    public String getModel() {
+        return Model;
     }
 
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
+    public void setModel(String Model) {
+        this.Model = Model;
     }
 
     public String getEngineType() {
@@ -79,12 +83,12 @@ public class CarEntity implements Serializable {
         this.engineCapacity = engineCapacity;
     }
 
-    public String getBodyCar() {
-        return bodyCar;
+    public String getBody() {
+        return body;
     }
 
-    public void setBodyCar(String bodyCar) {
-        this.bodyCar = bodyCar;
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public String getColor() {
@@ -103,26 +107,26 @@ public class CarEntity implements Serializable {
         this.releaseYear = releaseYear;
     }
 
-    public int getCarPrice() {
-        return carPrice;
+    public int getPrice() {
+        return price;
     }
 
-    public void setCarPrice(int carPrice) {
-        this.carPrice = carPrice;
+    public void setPrice(int Price) {
+        this.price = price;
     }
 
     @Override
     public String toString() {
         return "CarEntity{" +
                 "id=" + id +
-                ", carName='" + carName + '\'' +
-                ", carModel='" + carModel + '\'' +
+                ", Name='" + Name + '\'' +
+                ", Model='" + Model + '\'' +
                 ", engineType='" + engineType + '\'' +
                 ", engineCapacity=" + engineCapacity +
-                ", bodyCar='" + bodyCar + '\'' +
+                ", body='" + body + '\'' +
                 ", color='" + color + '\'' +
                 ", releaseYear=" + releaseYear +
-                ", carPrice=" + carPrice +
+                ", price=" + price +
                 '}';
     }
 }

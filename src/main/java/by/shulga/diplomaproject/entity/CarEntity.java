@@ -1,19 +1,23 @@
 package by.shulga.diplomaproject.entity;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 
 import java.io.Serializable;
 
 @Entity
 @Table(name = "cars")
+@NoArgsConstructor
 public class CarEntity implements Serializable {
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "category_name")
-    private String Name;
-    private String Model;
+    private Integer id;
+    private String name;
+    private String model;
     @Column(name = "engine_type")
     private String engineType;
 
@@ -25,13 +29,11 @@ public class CarEntity implements Serializable {
     private int releaseYear;
     private int price;
 
-    public CarEntity(){
-    }
-    public CarEntity (String Name, String Model, String engineType,
+    public CarEntity (String name, String model, String engineType,
                       int engineCapacity, String body, String color,
                       int releaseYear,int price){
-        this.Name = Name;
-        this.Model = Model;
+        this.name = name;
+        this.model = model;
         this.engineType = engineType;
         this.engineCapacity = engineCapacity;
         this.body = body;
@@ -39,9 +41,6 @@ public class CarEntity implements Serializable {
         this.releaseYear = releaseYear;
         this.price = price;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     public int getId() {
         return id;
@@ -52,19 +51,19 @@ public class CarEntity implements Serializable {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getModel() {
-        return Model;
+        return model;
     }
 
-    public void setModel(String Model) {
-        this.Model = Model;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public String getEngineType() {
@@ -111,7 +110,7 @@ public class CarEntity implements Serializable {
         return price;
     }
 
-    public void setPrice(int Price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -119,8 +118,8 @@ public class CarEntity implements Serializable {
     public String toString() {
         return "CarEntity{" +
                 "id=" + id +
-                ", Name='" + Name + '\'' +
-                ", Model='" + Model + '\'' +
+                ", name='" + name + '\'' +
+                ", model='" + model + '\'' +
                 ", engineType='" + engineType + '\'' +
                 ", engineCapacity=" + engineCapacity +
                 ", body='" + body + '\'' +

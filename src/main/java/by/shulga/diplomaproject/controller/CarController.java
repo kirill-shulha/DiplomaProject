@@ -1,12 +1,13 @@
 package by.shulga.diplomaproject.controller;
 
 import by.shulga.diplomaproject.entity.CarEntity;
+import by.shulga.diplomaproject.response.ApiResponse;
 import by.shulga.diplomaproject.service.CarService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,32 +15,31 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/cars")
+@RequiredArgsConstructor
 public class CarController {
-
-    @Autowired
-    private CarService carService;
+    private final CarService carService;
 
     @GetMapping("/")
-    public ResponseEntity<List<CarEntity>> getCarEntities(){
-        List<CarEntity> body = carService.carEntityList();
+    public ResponseEntity<List<CarEntity>> getCar(){
+        List<CarEntity> body = carService.findAll();
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     ResponseEntity<ApiResponse> createCarEntity (@Valid @RequestBody CarEntity carEntity){
-        if (Objects.nonNull(carService.readCarEntity(carEntity.getName()))){
+        if (Objects.nonNull(carService.findByName(carEntity.getName()))){
             return new ResponseEntity<ApiResponse>(new ApiResponse(false,
                     "car already exists"), HttpStatus.CONFLICT);
         }
-        carService.createCarEntity(carEntity);
+        carService.save(carEntity);
         return new ResponseEntity<>(new ApiResponse(true,
                 "created the car"), HttpStatus.CREATED);
     }
-    @PostMapping("/update/{id}")
+    @PutMapping("/{id}")
     ResponseEntity<ApiResponse> updateCarEntity
             (@PathVariable ("id") Integer id, @Valid @RequestBody CarEntity carEntity){
-        if (Objects.nonNull(carService.readCarEntity(id))) {
-            carService.updateCarEntity(id, carEntity);
+        if (Objects.nonNull(carService.findById(id))) {
+            carService.save(id, carEntity);
             return new ResponseEntity<ApiResponse>(new ApiResponse(true,
                     "updated car entity"), HttpStatus.OK);
         }

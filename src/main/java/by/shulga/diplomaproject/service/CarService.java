@@ -2,35 +2,35 @@ package by.shulga.diplomaproject.service;
 
 import by.shulga.diplomaproject.entity.CarEntity;
 import by.shulga.diplomaproject.repository.CarRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CarService {
 
-    @Autowired
-    private CarRepository carRepository;
+    private final CarRepository carRepository;
 
-    public List<CarEntity> carEntityList(){
+    public List<CarEntity> findAll(){
         return carRepository.findAll();
     }
 
-    public void createCarEntity(CarEntity carEntity){
+    public void save (CarEntity carEntity){
         carRepository.save(carEntity);
     }
 
-    public CarEntity readCarEntity (String Name){
-        return carRepository.findByName(Name);
+    public Optional<CarEntity> findByName (String name){
+        return carRepository.findByName(name);
     }
 
-    public Optional<CarEntity> readCarEntity(Integer id){
+    public Optional<CarEntity> findById(Integer id){
         return carRepository.findById(id);
     }
 
-    public void updateCarEntity(Integer id, CarEntity newCarEntity){
+    public void save (Integer id, CarEntity newCarEntity){
         CarEntity carEntity = carRepository.findById(id).get();
         carEntity.setName(newCarEntity.getName());
         carEntity.setModel(newCarEntity.getModel());

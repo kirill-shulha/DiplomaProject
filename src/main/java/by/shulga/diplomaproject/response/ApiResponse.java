@@ -1,4 +1,4 @@
-package by.shulga.diplomaproject.controller;
+package by.shulga.diplomaproject.response;
 
 import java.time.LocalDateTime;
 

@@ -3,6 +3,7 @@ package by.shulga.diplomaproject.controller;
 import by.shulga.diplomaproject.entity.CarEntity;
 import by.shulga.diplomaproject.response.ApiResponse;
 import by.shulga.diplomaproject.service.CarService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/cars")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "JWT")
 public class CarController {
     private final CarService carService;
 

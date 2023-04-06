@@ -17,21 +17,21 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeRequests((auth)-> auth
-                        .requestMatchers("/", "/upload")
+                        .requestMatchers("/cars/**","/swagger-ui/**","/v3/api-docs/**", "/upload")
                         .permitAll()
-                        .requestMatchers("/hello").hasRole("USER")
+                        .requestMatchers("/cars/**").hasRole("USER")
                         .anyRequest()
-                        .authenticated())
-                .formLogin()
-                .loginPage("/login")
-                .successForwardUrl("/hello")
-                .defaultSuccessUrl("/hello")
-                .permitAll()
-                .and()
-                .logout()
-                //.logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
-                .permitAll();
+                        .authenticated());
+//                .formLogin()
+//                .loginPage("/login")
+//                .successForwardUrl("/hello")
+//                .defaultSuccessUrl("/hello")
+//                .permitAll()
+//                .and()
+//                .logout()
+//                .logoutUrl("/logout")
+//                .logoutSuccessUrl("/login")
+//                .permitAll();
 
         return http.build();
     }

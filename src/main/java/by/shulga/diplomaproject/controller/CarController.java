@@ -6,7 +6,6 @@ import by.shulga.diplomaproject.service.CarService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +29,7 @@ public class CarController {
     @PostMapping()
     ResponseEntity<ApiResponse> createCarEntity (@Valid @RequestBody CarEntity carEntity){
         if (Objects.nonNull(carService.findByName(carEntity.getName()))){
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false,
+            return new ResponseEntity<>(new ApiResponse(false,
                     "car already exists"), HttpStatus.CONFLICT);
         }
         carService.save(carEntity);
@@ -42,10 +41,10 @@ public class CarController {
             (@PathVariable ("id") Integer id, @Valid @RequestBody CarEntity carEntity){
         if (Objects.nonNull(carService.findById(id))) {
             carService.save(id, carEntity);
-            return new ResponseEntity<ApiResponse>(new ApiResponse(true,
+            return new ResponseEntity<>(new ApiResponse(true,
                     "updated car entity"), HttpStatus.OK);
         }
-        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "car entity does not exist"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ApiResponse(false, "car entity does not exist"), HttpStatus.NOT_FOUND);
     }
 
 }

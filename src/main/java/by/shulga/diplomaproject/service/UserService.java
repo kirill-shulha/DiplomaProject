@@ -45,7 +45,7 @@ public class UserService {
                 .orElseThrow();
         User user = converter.convert(userDTO);
         user.setRole(role);
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return converter.convert(user);
     }

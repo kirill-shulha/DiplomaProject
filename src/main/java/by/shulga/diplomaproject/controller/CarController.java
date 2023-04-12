@@ -44,7 +44,11 @@ public class CarController {
             return new ResponseEntity<>(new ApiResponse(true,
                     "updated car entity"), HttpStatus.OK);
         }
-        return new ResponseEntity<>(new ApiResponse(false, "car entity does not exist"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ApiResponse(false,
+                "car entity does not exist"), HttpStatus.NOT_FOUND);
     }
-
+    @DeleteMapping("/deleteCar/{id}")
+    public ResponseEntity<Long> deleteCarEntity(@PathVariable(value = "id") Long carId) {
+        return ResponseEntity.ok(carId);
+    }
 }

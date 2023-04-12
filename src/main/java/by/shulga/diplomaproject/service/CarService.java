@@ -29,9 +29,8 @@ public class CarService {
     public Optional<CarEntity> findById(Integer id){
         return carRepository.findById(id);
     }
-
     public void save (Integer id, CarEntity newCarEntity){
-        CarEntity carEntity = carRepository.findById(id).get();
+        CarEntity carEntity = carRepository.findById(id).orElseThrow();
         carEntity.setName(newCarEntity.getName());
         carEntity.setModel(newCarEntity.getModel());
         carEntity.setEngineType(newCarEntity.getEngineType());

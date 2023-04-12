@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface CarRepository extends JpaRepository<CarEntity, Integer> {
     Optional<CarEntity> findByName(String name);
+
 }

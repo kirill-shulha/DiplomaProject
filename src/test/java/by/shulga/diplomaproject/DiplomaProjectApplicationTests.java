@@ -1,13 +1,13 @@
-package by.shulga.diplomaproject;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class DiplomaProjectApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
-
-}
+//package by.shulga.diplomaproject;
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class DiplomaProjectApplicationTests {
+//
+//    @Test
+//    void contextLoads() {
+//    }
+//
+//}

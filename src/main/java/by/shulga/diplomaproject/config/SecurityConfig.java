@@ -22,9 +22,10 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().disable()
                 .authorizeRequests((auth)-> auth
-                        .requestMatchers("/cars/**","/swagger-ui/**","/v3/api-docs/**", "/upload")
+                        .requestMatchers("/cars/**","/swagger-ui/**","/v3/api-docs/**", "/upload",
+                                "/registration", "/login")
                         .permitAll()
-                        .requestMatchers("/cars/**").hasRole("USER")
+                        .requestMatchers("/cars2/**").hasRole("USER")
                         .anyRequest()
                         .authenticated()
                 .and()

@@ -1,7 +1,9 @@
 package by.shulga.diplomaproject.service;
 
+import by.shulga.diplomaproject.dto.CarDTO;
 import by.shulga.diplomaproject.entity.CarEntity;
 import by.shulga.diplomaproject.repository.CarRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

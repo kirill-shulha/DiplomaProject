@@ -20,7 +20,7 @@ import java.util.Objects;
 public class CarController {
     private final CarService carService;
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<List<CarEntity>> getCar(){
         List<CarEntity> body = carService.findAll();
         return new ResponseEntity<>(body, HttpStatus.OK);
@@ -28,7 +28,7 @@ public class CarController {
 
     @PostMapping()
     ResponseEntity<ApiResponse> createCarEntity (@Valid @RequestBody CarEntity carEntity){
-        if (Objects.nonNull(carService.findByName(carEntity.getName()))){
+        if ((carService.findByName(carEntity.getName())).isPresent()){
             return new ResponseEntity<>(new ApiResponse(false,
                     "car already exists"), HttpStatus.CONFLICT);
         }
@@ -39,7 +39,7 @@ public class CarController {
     @PutMapping("/{id}")
     ResponseEntity<ApiResponse> updateCarEntity
             (@PathVariable ("id") Integer id, @Valid @RequestBody CarEntity carEntity){
-        if (Objects.nonNull(carService.findById(id))) {
+        if ((carService.findById(id)).isPresent()) {
             carService.save(id, carEntity);
             return new ResponseEntity<>(new ApiResponse(true,
                     "updated car entity"), HttpStatus.OK);
@@ -47,7 +47,7 @@ public class CarController {
         return new ResponseEntity<>(new ApiResponse(false,
                 "car entity does not exist"), HttpStatus.NOT_FOUND);
     }
-    @DeleteMapping("/deleteCar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Long> deleteCarEntity(@PathVariable(value = "id") Long carId) {
         return ResponseEntity.ok(carId);
     }
